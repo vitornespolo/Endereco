@@ -12,8 +12,12 @@ public class EnderecoServiceImpl implements EnderecoService {
     @Autowired
     EnderecoRepository enderecoRepository;
 
+    @Autowired
+    LocalizacaoService localizacaoService;
+
     public Endereco atualizar(Long id, Endereco newEndereco) {
 
+        System.out.println(newEndereco.getZipcode());
         return enderecoRepository.findById(id)
                 .map(endereco -> {
                     endereco.setStreetName(newEndereco.getStreetName());
@@ -24,8 +28,8 @@ public class EnderecoServiceImpl implements EnderecoService {
                     endereco.setState(newEndereco.getState());
                     endereco.setCountry(newEndereco.getCountry());
                     endereco.setZipcode(newEndereco.getZipcode());
-                    endereco.setLatitude(newEndereco.getLatitude());
-                    endereco.setLongitude(newEndereco.getLongitude());
+                    endereco.setLatitude(newEndereco.getLatitude() == 0 ? localizacaoService.latitude() : newEndereco.getLatitude());
+                    endereco.setLongitude(newEndereco.getLongitude() == 0 ? localizacaoService.longitude() : newEndereco.getLongitude());
                     return enderecoRepository.save(endereco);
                 })
                 .orElseGet(() -> {

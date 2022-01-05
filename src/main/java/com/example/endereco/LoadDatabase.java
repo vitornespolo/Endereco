@@ -22,7 +22,7 @@ class LoadDatabase {
                     new Endereco("Rua bom amparo", 123, null, "pessima", "new city", "PR", "BR", "85515-000",
                             -26.0750377, -52.8413367)));
             log.info("Preloading " + repository.save(
-                    new Endereco("the elfeice", 15523, null, "boa", "New York", "NY", "USA", "8585-855", 40.6976701,
+                    new Endereco("the elfeice", 15523, null, "boa", "New York", "NY", "USA", "8585-855", 0,
                             -74.2598649)));
         };
     }

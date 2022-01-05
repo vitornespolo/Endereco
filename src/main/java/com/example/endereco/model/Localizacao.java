@@ -13,10 +13,10 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Localizacao {
 
-    private ArrayList results;
-    private String long_name;
-    private double lat;
-    private double lng;
+    private List<Result> results;
+//    private String long_name;
+//    private double lat;
+//    private double lng;
 
 
 }
