@@ -54,4 +54,15 @@ public class Endereco {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    public String getName() {
+        return this.zipcode + "+" + this.city + "," + this.state;
+    }
+
+    public void setName(String name) {
+        String[] parts = name.split(" ");
+        this.zipcode = parts[0];
+        this.city = parts[1];
+        this.state = parts[2];
+    }
 }

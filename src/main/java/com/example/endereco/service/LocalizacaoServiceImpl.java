@@ -12,8 +12,8 @@ import com.example.endereco.model.Localizacao;
 @Service
 public class LocalizacaoServiceImpl implements LocalizacaoService {
 
-    private static String test = "85515000BomSucessodoSul,Parana,PR";
-    private static final String URI = "https://maps.googleapis.com/maps/api/geocode/json?address=" + test
+    private String test = "85515000BomSucessodoSul,Parana,PR";
+    private final String URI = "https://maps.googleapis.com/maps/api/geocode/json?address=" + test
             + "&key=AIzaSyCj0cY2yEvVfYhAaTz3-P2MW-YRKmhz5Uw";
     RestTemplate restTemplate = new RestTemplate();
     ResponseEntity<Localizacao> responseEntity = restTemplate.exchange(URI, HttpMethod.GET, null,

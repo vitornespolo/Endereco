@@ -17,7 +17,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     public Endereco atualizar(Long id, Endereco newEndereco) {
 
-        System.out.println(newEndereco.getZipcode());
+        System.out.println(newEndereco.getName());
         return enderecoRepository.findById(id)
                 .map(endereco -> {
                     endereco.setStreetName(newEndereco.getStreetName());

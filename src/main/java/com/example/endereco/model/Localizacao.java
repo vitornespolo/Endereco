@@ -1,11 +1,8 @@
 package com.example.endereco.model;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -14,9 +11,18 @@ import lombok.Data;
 public class Localizacao {
 
     private List<Result> results;
-//    private String long_name;
-//    private double lat;
-//    private double lng;
+    private Endereco endereco;
 
+    public Endereco getEndereco() {
 
+        if (endereco == null) {
+            this.endereco = new Endereco();
+        }
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+
+        this.endereco = endereco;
+    }
 }

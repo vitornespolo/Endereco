@@ -1,7 +1,5 @@
 package com.example.endereco.controller;
 
-import java.net.URISyntaxException;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +16,11 @@ public class LocalizacaoController {
     @Autowired
     LocalizacaoServiceImpl localizacaoService;
 
-    //JSONObject jsonpObject = new JSONObject(localizacaoService.chamarApi());
-
     @GetMapping
     public ResponseEntity<String> getLocalizacao() {
 
         JSONObject localizacao = localizacaoService.consumerApi();
         String teste = localizacao.toString();
-//        System.out.println(teste);
 
         return ResponseEntity.ok(teste);
     }
