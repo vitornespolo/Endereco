@@ -12,9 +12,17 @@ import com.example.endereco.model.Localizacao;
 @Service
 public class LocalizacaoServiceImpl implements LocalizacaoService {
 
-    private String test = "85515000BomSucessodoSul,Parana,PR";
-    private final String URI = "https://maps.googleapis.com/maps/api/geocode/json?address=" + test
-            + "&key=AIzaSyCj0cY2yEvVfYhAaTz3-P2MW-YRKmhz5Uw";
+    private String endInformado;
+
+    public String teste(String test) {
+
+        endInformado = test;
+
+        return endInformado;
+    }
+
+    public String endReserva = endInformado == null ? "1600+Amphitheatre+Parkway,+Mountain+View,+CA" : endInformado;
+    private final String URI = "https://maps.googleapis.com/maps/api/geocode/json?address=" + endReserva + "&key=AIzaSyCj0cY2yEvVfYhAaTz3-P2MW-YRKmhz5Uw";
     RestTemplate restTemplate = new RestTemplate();
     ResponseEntity<Localizacao> responseEntity = restTemplate.exchange(URI, HttpMethod.GET, null,
             Localizacao.class);
@@ -28,9 +36,8 @@ public class LocalizacaoServiceImpl implements LocalizacaoService {
 
         for (int i = 0; i < arr.length(); i++) {
             jsonString = arr.getJSONObject(i).getJSONObject("geometry").getJSONObject("location");
-
         }
-        System.out.println("retorno :" + jsonString.toString());
+        System.out.println("retorno :" + URI);
         return jsonString;
     }
 
@@ -46,8 +53,6 @@ public class LocalizacaoServiceImpl implements LocalizacaoService {
 
         double lat = 0;
         lat = consumerApi().getDouble("lat");
-
         return lat;
     }
-
 }

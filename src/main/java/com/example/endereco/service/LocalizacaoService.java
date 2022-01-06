@@ -1,7 +1,5 @@
 package com.example.endereco.service;
 
-import java.net.URISyntaxException;
-
 import org.json.JSONObject;
 
 public interface LocalizacaoService {
@@ -12,4 +10,5 @@ public interface LocalizacaoService {
 
     double latitude();
 
+    String teste(String teste);
 }

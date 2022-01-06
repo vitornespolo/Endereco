@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.endereco.model.Endereco;
 import com.example.endereco.repository.EnderecoRepository;
 import com.example.endereco.service.EnderecoServiceImpl;
+import com.example.endereco.service.LocalizacaoService;
 
 @RestController
 @RequestMapping("/enderecos")
@@ -30,11 +32,16 @@ public class EnderecoController {
     EnderecoRepository enderecoRepository;
     @Autowired
     EnderecoServiceImpl enderecoServer;
+    @Autowired
+    LocalizacaoService localizacaoService;
+
+    Endereco enderecoSalvo;
+
 
     @GetMapping
     public List<Endereco> readAll() {
 
-        return enderecoRepository.findAll();
+        return  enderecoRepository.findAll();
     }
 
     @GetMapping("/{id}")
@@ -47,14 +54,17 @@ public class EnderecoController {
     @PostMapping
     public ResponseEntity<Endereco> add(@RequestBody Endereco endereco, HttpServletResponse response) {
 
-        Endereco enderecoSalvo = enderecoRepository.save(endereco);
+        enderecoSalvo = enderecoRepository.save(endereco);
+        localizacaoService.teste(enderecoSalvo ==  null ? "null" : enderecoSalvo.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(enderecoSalvo);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Endereco> updateEndereco(@RequestBody Endereco newEndereco, @PathVariable Long id) {
 
-        Endereco enderecoSalvo = enderecoServer.atualizar(id, newEndereco);
+        enderecoSalvo = enderecoServer.atualizar(id, newEndereco);
+        localizacaoService.teste(enderecoSalvo ==  null ? "null" : enderecoSalvo.getName());
+
         return ResponseEntity.ok(enderecoSalvo);
     }
 
@@ -64,5 +74,14 @@ public class EnderecoController {
 
         enderecoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/localizacao")
+    public ResponseEntity<String> getLocalizacao() {
+
+        JSONObject localizacao = localizacaoService.consumerApi();
+        String teste = localizacao.toString();
+        System.out.println(enderecoSalvo ==  null ? "null" : enderecoSalvo.getName());
+        return ResponseEntity.ok(teste);
     }
 }

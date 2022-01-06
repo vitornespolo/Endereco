@@ -11,18 +11,18 @@ import lombok.Data;
 public class Localizacao {
 
     private List<Result> results;
-    private Endereco endereco;
+    private String endereco;
 
-    public Endereco getEndereco() {
-
-        if (endereco == null) {
-            this.endereco = new Endereco();
-        }
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-
-        this.endereco = endereco;
-    }
+//    public Endereco getEndereco() {
+//
+//        if (endereco == null) {
+//            this.endereco = new Endereco();
+//        }
+//        return endereco;
+//    }
+//
+//    public void setEndereco(Endereco endereco) {
+//
+//        this.endereco = endereco;
+//    }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.endereco.model.Endereco;
+import com.example.endereco.model.Localizacao;
 import com.example.endereco.repository.EnderecoRepository;
 
 @Service
@@ -11,13 +12,13 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Autowired
     EnderecoRepository enderecoRepository;
-
     @Autowired
-    LocalizacaoService localizacaoService;
+    LocalizacaoServiceImpl localizacaoService;
 
     public Endereco atualizar(Long id, Endereco newEndereco) {
 
         System.out.println(newEndereco.getName());
+
         return enderecoRepository.findById(id)
                 .map(endereco -> {
                     endereco.setStreetName(newEndereco.getStreetName());
@@ -28,8 +29,10 @@ public class EnderecoServiceImpl implements EnderecoService {
                     endereco.setState(newEndereco.getState());
                     endereco.setCountry(newEndereco.getCountry());
                     endereco.setZipcode(newEndereco.getZipcode());
-                    endereco.setLatitude(newEndereco.getLatitude() == 0 ? localizacaoService.latitude() : newEndereco.getLatitude());
-                    endereco.setLongitude(newEndereco.getLongitude() == 0 ? localizacaoService.longitude() : newEndereco.getLongitude());
+                    endereco.setLatitude(
+                            newEndereco.getLatitude() == 0 ? localizacaoService.latitude() : newEndereco.getLatitude());
+                    endereco.setLongitude(newEndereco.getLongitude() == 0 ? localizacaoService.longitude()
+                            : newEndereco.getLongitude());
                     return enderecoRepository.save(endereco);
                 })
                 .orElseGet(() -> {
